@@ -13,9 +13,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let layout = UICollectionViewFlowLayout()
+        //layout.scrollDirection = .horizontal
+        let controller = HomeController(collectionViewLayout: layout)
+        let navigationController = UINavigationController(rootViewController: controller)
+        UINavigationBar.appearance().barTintColor =  UIColor.rgb(red: 230, green: 32, blue: 31)
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(),for: .default)
+        application.statusBarStyle = .lightContent
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+        window?.rootViewController = navigationController
+        window?.addSubview(statusBarBackgroundView)
+        statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate(
+            [
+                statusBarBackgroundView.topAnchor.constraint(equalTo: (window?.topAnchor)!),
+                statusBarBackgroundView.leadingAnchor.constraint(equalTo: (window?.leadingAnchor)!),
+                statusBarBackgroundView.trailingAnchor.constraint(equalTo: (window?.trailingAnchor)!),
+                statusBarBackgroundView.heightAnchor.constraint(equalToConstant: 20)
+            ]
+        )
         return true
     }
 
